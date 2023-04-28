@@ -216,6 +216,7 @@
             digitalWrite(motor2pin2, HIGH); 
         }  
     }
+
     void L298N_Motor_Driver::Links_abbiegen(){
         if(motor_initalsiert == 1){
             Serial.println("Es müssen 2 Motor initalsisiert werden");
@@ -236,3 +237,24 @@
     }
 
 
+    void L298N_Motor_Driver::gib_mir_einfach_genau_das_was_du_willst(int motor1, int motor2, bool motor1_vorwaerts, bool motor2_vorwaerts){
+        ledcWrite(pwmChannel1, motor1);
+        ledcWrite(pwmChannel2, motor2);
+        if(motor1_vorwaerts){
+            digitalWrite(motor1pin1, LOW);
+            digitalWrite(motor1pin2, HIGH); 
+        }
+        else{
+            digitalWrite(motor1pin1, HIGH);
+            digitalWrite(motor1pin2, LOW); 
+        }
+
+        if(motor2_vorwaerts){
+            digitalWrite(motor2pin1, LOW);
+            digitalWrite(motor2pin2, HIGH); 
+        }
+        else{
+            digitalWrite(motor2pin1, HIGH);
+            digitalWrite(motor2pin2, LOW); 
+        }
+    }

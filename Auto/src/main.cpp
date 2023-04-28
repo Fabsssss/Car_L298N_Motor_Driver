@@ -2,11 +2,32 @@
 #include <string>
 #include "BluetoothSerial.h"
 #include "L298N_Motor_Driver.hpp"
-
+#include <vector>
+#include <sstream>
 
 L298N_Motor_Driver md(4,0,2,16,17,5);
 BluetoothSerial bt;
 std::string msg = "";
+
+
+
+std::vector<std::string> splitString(const std::string& str) {
+    std::vector<std::string> result;
+    std::stringstream ss(str);
+    std::string token;
+    while (std::getline(ss, token, ' ')) {
+        result.push_back(token);
+    }
+    return result;
+}
+
+bool stringToBool(const std::string& str) {
+    std::istringstream iss(str);
+    bool val;
+    iss >> std::boolalpha >> val;
+    return val;
+}
+
 
 void setup() {
     Serial.begin(115200);
@@ -23,12 +44,14 @@ void loop() {
         Serial.println(msg.c_str());
         if(msg == "0"){
             md.Auto_stop();
-        }
-        if(msg == "1"){
-            md.Fahre_gradeaus();
-        }
-        if(msg == "2"){
-            md.Fahre_rueckwaerts();
+        }else{
+            std::vector<std::string> vec = splitString(msg);
+            if(vec.size() >= 4){
+            md.gib_mir_einfach_genau_das_was_du_willst(std::stoi(vec[0]),std::stoi(vec[1]),stringToBool(vec[2]),stringToBool(vec[3]));
+            }else{
+                Serial.println("irgendwas stimmt da nicht!");
+            }
+            vec.clear();
         }
         msg = "";
     }

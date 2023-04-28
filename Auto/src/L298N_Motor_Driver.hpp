@@ -33,4 +33,6 @@ public:
     void Auto_drehen_links();
     void Auto_drehen_links(int geschwindigkeit);
     void Auto_stop();
+
+    void gib_mir_einfach_genau_das_was_du_willst(int motor1, int motor2, bool motor1_vorwaerts, bool motor2_vorwaerts);
 };
