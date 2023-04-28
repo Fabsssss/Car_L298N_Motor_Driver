@@ -1,6 +1,12 @@
 #include <Arduino.h>
 #include "L298N_Motor_Driver.hpp"
-    
+    /**
+     * Diese Funktion ist dafür wenn man nur eine seites des Motors benutzen will
+     * 
+     * @param motor1pin1 Für input 1 
+     * @param motor1pin2 Für input 2 
+     * @param enablemotor1pin Pin an dem der enable 1 angeschlossen ist  
+     */
     L298N_Motor_Driver::L298N_Motor_Driver(int motor1pin1,int motor1pin2,int enablemotor1pin){
         this->motor1pin1 = motor1pin1;
         this->motor1pin2 = motor1pin2;
